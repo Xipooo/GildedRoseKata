@@ -168,6 +168,21 @@ public class GildedRose_AcceptanceTests
         Assert.Equal(0, backstagePasses.Quality);
     }
 
+    [Fact]
+    // "Conjured" items degrade in Quality twice as fast as normal items
+    public void UpdateQuality_Should_Return2Quality_When_ItemIsConjuredAndQualityIs4()
+    {
+        // Given the item is "Conjured" and it's quality is 4
+        var conjured = createItem("Conjured", 4, 5);
+        var SUT = createGildedRose(conjured);
+
+        // When the quality update occurs
+        SUT.UpdateQuality();
+
+        // Then the quality of the "Conjured" item is 2
+        Assert.Equal(2, conjured.Quality);
+    }
+
     private Item createItem(string name, int quality, int sellIn) => new Item { Name = name, Quality = quality, SellIn = sellIn };
     private GildedRose createGildedRose(Item item) => new GildedRose(new List<Item> { item });
 }
