@@ -15,14 +15,18 @@ public partial class GildedRose
     {
         foreach (var item in _items)
         {
-            IItemUpdate typeItem = item.Name switch
-            {
-                "Aged Brie" => new AgedBrie(item),
-                "Backstage passes to a TAFKAL80ETC concert" => new BackstagePass(item),
-                "Sulfuras, Hand of Ragnaros" => new Sulfurace(item),
-                _ => new NormalItem(item)
-            };
+            var typeItem = UpdateableItemFactory(item);
             typeItem.Update();
         }
+    }
+
+    public IItemUpdate UpdateableItemFactory(Item item){
+        return item.Name switch
+        {
+            "Aged Brie" => new AgedBrie(item),
+            "Backstage passes to a TAFKAL80ETC concert" => new BackstagePass(item),
+            "Sulfuras, Hand of Ragnaros" => new Sulfurace(item),
+            _ => new NormalItem(item)
+        };
     }
 }
