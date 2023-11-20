@@ -183,6 +183,21 @@ public class GildedRose_AcceptanceTests
         Assert.Equal(2, conjured.Quality);
     }
 
+    [Fact]
+    // "Conjured" items should decrease in sellIn value
+    public void UpdateQuality_Should_SetSellingTo3_When_ItemIsConjuredAndSellInIs4()
+    {
+        // Given the item is "Conjured" and it's sellin is 4
+        var conjured = createItem("Conjured", 8, 4);
+        var SUT = createGildedRose(conjured);
+
+        // When the quality update occurs
+        SUT.UpdateQuality();
+
+        // Then the SellIn of the "Conjured" item is 3
+        Assert.Equal(3, conjured.SellIn);
+    }
+
     private Item createItem(string name, int quality, int sellIn) => new Item { Name = name, Quality = quality, SellIn = sellIn };
     private GildedRose createGildedRose(Item item) => new GildedRose(new List<Item> { item });
 }
