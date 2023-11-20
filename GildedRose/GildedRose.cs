@@ -14,6 +14,7 @@ public partial class GildedRose
             { "Aged Brie", (item) => new AgedBrie(item) },
             { "Backstage passes to a TAFKAL80ETC concert", (item) => new BackstagePass(item) },
             { "Sulfuras, Hand of Ragnaros", (item) => new UpdatableItem(item) },
+            { "Conjured", (item) => new ConjuredItem(item)},
             { "Default", (item) => new NormalItem(item) }
     };
 
