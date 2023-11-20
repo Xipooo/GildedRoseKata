@@ -15,20 +15,32 @@ public class GildedRose
     {
         foreach (var item in _items)
         {
-            // Aged Brie
-            if (item.Name == "Aged Brie" && item.Quality < 50) item.Quality = item.Quality + 1;
-            if (item.Name == "Aged Brie" && item.Quality < 50 && item.SellIn < 0) item.Quality = item.Quality + 1;
-
-            // Backstage Passes
-            if (item.Name == "Backstage passes to a TAFKAL80ETC concert" && item.Quality < 50) item.Quality = item.Quality + 1;
-            if (item.Name == "Backstage passes to a TAFKAL80ETC concert" && item.Quality < 50 && item.SellIn < 11) item.Quality = item.Quality + 1;
-            if (item.Name == "Backstage passes to a TAFKAL80ETC concert" && item.Quality < 50 &&  item.SellIn < 6) item.Quality = item.Quality + 1;
-            if (item.Name == "Backstage passes to a TAFKAL80ETC concert" && item.SellIn < 1) item.Quality = item.Quality - item.Quality;
-
-            // Exclusions
-            if (item.Name != "Sulfuras, Hand of Ragnaros") item.SellIn = item.SellIn - 1;
-            if (item.Name != "Sulfuras, Hand of Ragnaros" && item.SellIn < 0 && item.Name != "Backstage passes to a TAFKAL80ETC concert" && item.Quality > 0) item.Quality = item.Quality - 1;
-            if (item.Name != "Sulfuras, Hand of Ragnaros" && item.Name != "Aged Brie" && item.Name != "Backstage passes to a TAFKAL80ETC concert" && item.Quality > 0) item.Quality = item.Quality - 1;
+            if (item.Name == "Aged Brie") AgedBrieUpdate(item);
+            else if (item.Name == "Backstage passes to a TAFKAL80ETC concert") BackstagePassesUpdate(item);
+            else if (item.Name == "Sulfuras, Hand of Ragnaros") SulfrasUpdate(item);
+            else NormalUpdate(item);
         }
+    }
+
+    public void AgedBrieUpdate(Item item) {
+        if (item.Quality < 50) item.Quality = item.Quality + 1;
+        if (item.Quality < 50 && item.SellIn < 0) item.Quality = item.Quality + 1;
+    }
+
+    public void BackstagePassesUpdate(Item item) {
+        if (item.Quality < 50) item.Quality = item.Quality + 1;
+        if (item.Quality < 50 && item.SellIn < 11) item.Quality = item.Quality + 1;
+        if (item.Quality < 50 && item.SellIn < 6) item.Quality = item.Quality + 1;
+        if (item.SellIn < 1) item.Quality = item.Quality - item.Quality;
+    }
+
+    public void SulfrasUpdate(Item item) {
+        return;
+    }
+
+    public void NormalUpdate(Item item) {
+        if (item.SellIn < 0 && item.Quality > 0) item.Quality = item.Quality - 1;
+        if (item.Quality > 0) item.Quality = item.Quality - 1;
+        item.SellIn = item.SellIn - 1;
     }
 }
