@@ -1,15 +1,9 @@
 namespace GildedRoseKata;
-public class NormalItem : IItemUpdate
+public class NormalItem : UpdatableItem
 {
-    private Item item;
+    public NormalItem(Item item) : base(item) { }
 
-
-    public NormalItem(Item item)
-    {
-        this.item = item;
-    }
-
-    public void Update()
+    public override void Update()
     {
         if (item.SellIn < 0 && item.Quality > 0) item.Quality = item.Quality - 1;
         if (item.Quality > 0) item.Quality = item.Quality - 1;

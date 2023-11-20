@@ -20,12 +20,13 @@ public partial class GildedRose
         }
     }
 
-    public IItemUpdate UpdateableItemFactory(Item item){
+    public UpdatableItem UpdateableItemFactory(Item item)
+    {
         return item.Name switch
         {
             "Aged Brie" => new AgedBrie(item),
             "Backstage passes to a TAFKAL80ETC concert" => new BackstagePass(item),
-            "Sulfuras, Hand of Ragnaros" => new Sulfurace(item),
+            "Sulfuras, Hand of Ragnaros" => new UpdatableItem(item),
             _ => new NormalItem(item)
         };
     }

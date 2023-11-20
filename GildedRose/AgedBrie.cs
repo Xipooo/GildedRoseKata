@@ -1,15 +1,10 @@
 namespace GildedRoseKata;
 
-public class AgedBrie : IItemUpdate
+public class AgedBrie : UpdatableItem
 {
-    private Item item;
+    public AgedBrie(Item item) : base(item) {}
 
-    public AgedBrie(Item item)
-    {
-        this.item = item;
-    }
-
-    public void Update()
+    public override void Update()
     {
         if (item.Quality < 50) item.Quality = item.Quality + 1;
         if (item.Quality < 50 && item.SellIn < 0) item.Quality = item.Quality + 1;
