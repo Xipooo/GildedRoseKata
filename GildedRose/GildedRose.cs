@@ -15,10 +15,14 @@ public class GildedRose
     {
         foreach (var item in _items)
         {
-            if (item.Name == "Aged Brie") new AgedBrie(item).Update();
-            else if (item.Name == "Backstage passes to a TAFKAL80ETC concert") new BackstagePass(item).Update();
-            else if (item.Name == "Sulfuras, Hand of Ragnaros") new Sulfurace(item).Update();
-            else new NormalItem(item).Update();
+            IItemUpdate typeItem = item.Name switch
+            {
+                "Aged Brie" => new AgedBrie(item),
+                "Backstage passes to a TAFKAL80ETC concert" => new BackstagePass(item),
+                "Sulfuras, Hand of Ragnaros" => new Sulfurace(item),
+                _ => new NormalItem(item)
+            };
+            typeItem.Update();
         }
     }
 
